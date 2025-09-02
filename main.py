@@ -1,4 +1,4 @@
-from loja import cadastrar_roupa, listar_roupas_cadastradas, realizar_venda, compra_aleatoria
+from loja import cadastrar_roupa, listar_roupas_cadastradas, realizar_venda, compra_aleatoria # 8.10 – Módulos
 
 def menu():
     print("====== Sistema de Loja de Roupas ======")

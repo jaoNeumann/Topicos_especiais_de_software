@@ -1,14 +1,15 @@
 import random
-from validacao import input_str, input_float, input_int, input_bool
+from validacao import input_str, input_float, input_int, input_bool # 8.10 – Módulos
 
+# 8.1 Variáveis locais e globais 
 DESCONTO_PADRAO = 0.105
 roupas = []
 
-
+# 8.4 - Parâmetros Opcionais
 def obter_tamanho_peca(tamanho_padrao='G'):
     tamanho = input(f"Tamanho (P, M, G, GG..., padrão é {tamanho_padrao}): ").strip()
     return tamanho if tamanho != '' else tamanho_padrao
-
+# 8.7 – Empacotamento de parâmetros
 def criar_roupa(**dados):
     return {
         "nome": dados.get("nome", "Sem nome"),
@@ -21,7 +22,7 @@ def cadastrar_roupa():
     nome = input_str("Nome da peça: ")
     tamanho = obter_tamanho_peca()
     preco = input_float("Preço da peça (R$): ")
-    estoque = input_int("Quantidade em estoque: ", minimo=0)
+    estoque = input_int("Quantidade em estoque: ", minimo=0)# 8.5 - Nomeando parâmetros
 
     # 8.12 - verificando os tipos
     print(f"\nTipos registrados: nome={type(nome)}, tamanho={type(tamanho)}, preco={type(preco)}, estoque={type(estoque)}\n")
@@ -35,20 +36,20 @@ def cadastrar_roupa():
 
     roupas.append(roupa)
     print(f"Peça '{nome}' cadastrada com sucesso.\n")
-
+# 8.6 - Funções como parâmetro
 def listar_roupas(*roupas_para_listar, func_listar_roupa=None):
     if not roupas_para_listar:
         print("⚠ Nenhuma peça cadastrada ainda.\n")
         return
     for i, roupa in enumerate(roupas_para_listar):
         func_listar_roupa(i, roupa)
-
+# 8.8 – Desempacotamento de parâmetros
 def listar_roupa(i, roupa):
     print(
         f"{i+1} - {roupa['nome']} | Tamanho: {roupa['tamanho']} | "
         f"Preço: R${roupa['preco']:.2f} | Estoque: {roupa['estoque']}"
     )
-
+# 8.9 - Funções Lambda
 def listar_roupas_cadastradas():
     if not roupas:
         print("⚠ Nenhuma peça cadastrada ainda.\n")
@@ -70,7 +71,7 @@ def realizar_venda():
     if not roupas:
         print("⚠ Nenhuma peça cadastrada para vender.\n")
         return
-
+    # 8.6 - Funções como parâmetro
     listar_roupas(*roupas, func_listar_roupa=listar_roupa)
 
     indice = input_int("Digite o número da peça para vender: ", minimo=1, maximo=len(roupas)) - 1
@@ -82,6 +83,7 @@ def realizar_venda():
         return
     
     tem_desconto_personalizado = input_bool('Deseja desconto personalizado? [S/N] ')
+    # 8.1 - Variáveis locais e globais
     if tem_desconto_personalizado:
         desconto = input_float('Qual o valor do desconto (ex: 0.10 para 10%)? ')
     else:
